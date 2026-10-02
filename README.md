@@ -4,25 +4,44 @@ A static website: plain HTML, CSS and a few small JavaScript files. No framework
 
 ## Current status
 
-**Done and in the page**
-- Your two photographs: the close-up darshan photo is the hero and the first gallery photo, and the darshan sanctum photo is the second gallery photo. The social-share card (what WhatsApp, Instagram, Facebook, Telegram and X show) is built from the close-up.
-- Your email, `shreeradharaman.vrindavan00@gmail.com`: contact card, notes card, "Visiting" section, footer, and the site's structured data.
-- Your Instagram, `@radha_raman_juu.darshan`.
-- The full design, navigation, darshan timeline, gallery with full-screen viewer, Vrindavan section, temple information, footer, 404 page, SEO files, security headers and tests.
+**Complete: nothing is left to fill in.** `npm run check -- --strict` passes with no placeholders.
 
-**Still needs information only you have.** Nothing below was guessed. Run `npm run check` for the exact line numbers.
+- **Your photographs:** the close-up darshan photo is the hero and the first gallery photo; the sanctum photo is the second gallery photo. The social-share card (what WhatsApp, Instagram, Facebook, Telegram and X show) is built from the close-up.
+- **Your links:** Instagram `@radha_raman_juu.darshan`, YouTube `@radharamanjuu_official`, the WhatsApp Channel, and your email `shreeradharaman.vrindavan00@gmail.com`. All three profiles are also in the structured data for search engines.
+- **Your address:** `https://shreeradgaraman.github.io/RadhaRamanJuu/` is set in the canonical link, social-share tags, structured data, `sitemap.xml`, `robots.txt` and the 404 page.
+- **Content researched from public sources** (the temple's own `radharaman.org` and Wikipedia; see the next section): the aarti schedule, overview, history and seva text.
 
-| What | Where | How |
-| --- | --- | --- |
-| Your domain | everywhere it is needed | `npm run domain -- https://your-domain.com` |
-| Darshan timings (5 slots) | Today's Darshan section | Replace each `[Add timing]` with plain text such as `5:30 am – 6:30 am`. Live / Upcoming / Completed is worked out automatically in Indian Standard Time. Keep the slots in the order they happen. |
-| Temple overview, history, seva | Temple information section | Replace the three highlighted `[…]` notes with your own text. Use only facts you can verify. |
-| YouTube channel link | 4 places in `index.html` | Replace `https://www.youtube.com/@REPLACE_YOUTUBE_HANDLE` with your channel address |
-| WhatsApp Channel link | 4 places in `index.html` | Replace `REPLACE_CHANNEL_ID` with your channel ID |
+## Please check before you publish
 
-Until the two social links are set, those buttons are **hidden** rather than shown broken. They appear on their own once the address is filled in.
+Everything below was written from published sources, not from an official notice, so please read it once and correct anything you know to be different.
 
-When all of that is done, `npm run check -- --strict` passes with nothing left to replace.
+1. **Aarti times** (Today's Darshan section). Sources disagree. The set used is the one the Braj Rasik and shrimathuraji.com listings agree on:
+
+   | Aarti | Summer | Winter |
+   | --- | --- | --- |
+   | Mangla | 5:00 am | 5:30 am |
+   | Shringar | 10:00 am | 10:30 am |
+   | Rajbhog | 12:30 pm | 12:30 pm |
+   | Sandhya | 7:15 pm | 6:30 pm |
+   | Shayan | 9:30 pm | 9:00 pm |
+
+   Other sites give 4:00 am for summer Mangla, and 7:00 pm for summer Sandhya. **You know the real times: correct any that are wrong.** To change a time, edit the text inside the matching `<span class="slot__value">` in `index.html`. The page states that times are "compiled from published listings, not an official temple notice"; keep that wording until you have confirmed them with the temple.
+2. **"Aulai Darshan"** from the original brief is not in any source I could find, so the fifth card is **Shayan Aarti** instead. If "Aulai" is a real darshan, tell me when it happens and add it as another `<li class="slot">`.
+3. **Overview, History, Seva** (Temple information section) are short summaries with a small source line under each. The temple dates are deliberately left out because sources disagree about them (1542 is quoted for the manifestation, other sources date the temple itself differently). Seva *booking* details are not included, because the temple's own site blocks automated reading. If you have them, add them to the Seva section.
+4. **Your GitHub address** is `shreeradgaraman…` (with a "g"). Your email says `shreeradharaman…`. If the GitHub name is a typo, run `npm run domain -- https://YOUR-CORRECT-ADDRESS/` and everything is updated at once.
+
+## Publishing on GitHub Pages
+
+1. Upload every file in this folder to the root of the repository `RadhaRamanJuu` (keep the folders exactly as they are, and include the hidden `.nojekyll` and `.gitignore` files).
+2. In the repository, go to **Settings → Pages**, choose **Deploy from a branch**, select your main branch and the **/ (root)** folder, and save. After a minute the site is live at `https://shreeradgaraman.github.io/RadhaRamanJuu/`.
+
+Notes for GitHub Pages:
+- The site lives in a sub-folder (`/RadhaRamanJuu/`). Everything uses relative links, and the 404 page knows the base path, so missing pages show the styled "not found" page instead of a blank one. This was tested by serving the project exactly the way GitHub Pages does.
+- `.nojekyll` stops GitHub from running its site generator over your files.
+- `_headers` is ignored by GitHub Pages (it only works on Netlify and Cloudflare Pages). The Content-Security-Policy inside `index.html` still applies. Headers such as `X-Frame-Options` cannot be set on GitHub Pages.
+- Search engines read `robots.txt` only from the very top of a domain, so the one in this folder is informational for a project site. Submit `sitemap.xml` in Google Search Console instead.
+- Everything in the repository is public, including `source-images/originals/`. Remove that folder from the repository if you don't want the original photo files to be downloadable.
+- Moving to your own domain later? Run `npm run domain -- https://your-domain.com` and re-upload the changed files.
 
 ## Quick start
 
@@ -65,6 +84,7 @@ npm run check                    # pre-launch checks and the list of what is sti
 | Path | Purpose |
 | --- | --- |
 | `index.html` | The whole home page |
+| `.nojekyll` | Tells GitHub Pages to publish the files as they are |
 | `css/tokens.css` | **All** colours, type sizes, spacing, radii, glass and motion values. Change a design value here once |
 | `css/styles.css` | Components and sections |
 | `js/` | `main.js` starts independent features: `nav.js`, `darshan.js`, `gallery.js`, `reveal.js`, `guards.js` |
@@ -93,9 +113,9 @@ npm run check                    # pre-launch checks and the list of what is sti
 
 ## Things worth knowing
 
-- **Hindi spellings** on the darshan cards (मंगला, शृंगार, राजभोग आरती, संध्या) should be checked by you. "Aulai Darshan" shows only its English name, because I wasn't certain of the correct Hindi spelling. You can add a `<p class="slot__hi" lang="hi">…</p>` line under its heading.
-- **"Darshan timings can change with the season and on festival days"** is a general note. Please confirm it is accurate for your temple, or edit it.
-- **Structured data** describes the site as an `Organization` and `WebSite`, with your Instagram profile and email. Add your YouTube and WhatsApp URLs to `sameAs` once known. If this is the temple's official site, you can add a `HinduTemple` entry with its confirmed address. I did not invent one.
+- **Hindi spellings** on the darshan cards (मंगला आरती, शृंगार आरती, राजभोग आरती, संध्या आरती, शयन आरती) are the standard forms, but please glance over them.
+- **Seasons.** Both the summer and winter times are always shown. The page highlights summer from April to October and winter from November to March, as commonly published. The temple decides the real change date; if it differs, edit `seasonFor` in `js/darshan.js`. A single time (an aarti) shows "Upcoming" and then "Earlier today"; a start–end range would also show "Live".
+- **Structured data** describes the site as an `Organization` and `WebSite`, with your email and your Instagram, YouTube and WhatsApp Channel profiles. If this is the temple's official site, you can add a `HinduTemple` entry with its confirmed address. I did not invent one.
 - **Security policy.** `index.html` has a Content-Security-Policy that allows only your own files, plus one hashed inline line (it adds the `js` class). If you edit that line, `npm run check` tells you the new hash.
 - **Privacy / legal links:** none were added, since I could not see yours. Add them to the footer if the old site had them.
 - **Your email address is shown as text on the page** (and in a mail link), so it can be picked up by automated address collectors. That is normal for a public contact address. If spam becomes a problem, use a contact form service instead.

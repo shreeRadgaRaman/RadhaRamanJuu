@@ -448,7 +448,8 @@ a { color: inherit; text-underline-offset: 0.2em; }
   background: var(--surface-2);
   border: 1.5px solid var(--c-gold);
 }
-.slot[data-status="completed"]::before { background: var(--c-gold); }
+.slot[data-status="completed"]::before,
+.slot[data-status="passed"]::before { background: var(--c-gold); }
 .slot[data-status="live"]::before {
   background: var(--c-saffron);
   border-color: var(--c-saffron);
@@ -469,11 +470,27 @@ a { color: inherit; text-underline-offset: 0.2em; }
 .slot__time {
   grid-column: 1 / -1;
   grid-row: 3;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.2rem 1.6rem;
   margin-top: 0.35rem;
   font-family: var(--font-display);
-  font-size: clamp(1.25rem, 1.05rem + 0.9vw, 1.55rem);
+  font-size: clamp(1.1rem, 1rem + 0.7vw, 1.35rem);
   color: var(--heading);
 }
+/* Both seasons are always shown. Today's is emphasised with colour and a gold underline
+   (not opacity or size, so contrast stays high and nothing shifts when the script marks it). */
+.slot__season {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  padding-bottom: 0.1rem;
+  border-bottom: 1.5px solid transparent;
+  color: var(--text-2);
+}
+.slot__season.is-active { color: var(--heading); border-bottom-color: var(--c-gold); }
+.slot__label { font-family: var(--font-body); font-size: var(--fs-meta); font-weight: 600; letter-spacing: 0.02em; color: var(--accent-ink); }
 .status {
   grid-column: 2; grid-row: 1 / span 2;
   display: inline-flex; align-items: center; gap: 0.5rem;
@@ -494,8 +511,13 @@ a { color: inherit; text-underline-offset: 0.2em; }
 }
 .slot[data-status="live"] .status { background: rgb(201 139 60 / 0.16); border-color: var(--c-saffron); color: var(--c-saffron-ink); }
 .slot[data-status="live"] .status__dot { background: currentColor; }
-.slot[data-status="completed"] .status__dot { background: currentColor; opacity: 0.55; }
+.slot[data-status="completed"] .status__dot,
+.slot[data-status="passed"] .status__dot { background: currentColor; opacity: 0.55; }
 .slot[data-status="pending"] .status__dot { border-style: dashed; }
+
+/* The status pill keeps its space but stays invisible until the script has worked it out; without JavaScript it is omitted. */
+[data-darshan]:not([data-ready]) .status { visibility: hidden; }
+html:not(.js) .status { display: none; }
 
 /* ---- Gallery ------------------------------------------------------------- */
 .masonry { columns: 2; column-gap: var(--s-3); padding: 0; list-style: none; }
@@ -666,6 +688,7 @@ html.is-locked { overflow: hidden; }
 }
 .accordion details[open] summary::after { transform: rotate(45deg); }
 .accordion__body { display: grid; gap: var(--s-3); padding: 0 0.25rem 1.6rem; color: var(--text-2); }
+.accordion__source { font-size: var(--fs-meta); }
 
 /* ---- Connect (social + contact) ----------------------------------------- */
 .connect { background: var(--surface-2); isolation: isolate; overflow: clip; }

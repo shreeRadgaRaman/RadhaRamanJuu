@@ -1,0 +1,21 @@
+# Security + caching headers for Netlify and Cloudflare Pages (other hosts: copy the values).
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
+  X-Frame-Options: DENY
+  Cross-Origin-Opener-Policy: same-origin
+
+/index.html
+  Cache-Control: no-cache
+
+/
+  Cache-Control: no-cache
+
+# Files are not renamed per version, so keep caching modest: a week, then revalidate.
+/assets/*
+  Cache-Control: public, max-age=604800, stale-while-revalidate=86400
+/css/*
+  Cache-Control: public, max-age=86400, stale-while-revalidate=86400
+/js/*
+  Cache-Control: public, max-age=86400, stale-while-revalidate=86400
