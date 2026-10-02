@@ -1,0 +1,179 @@
+/* ==========================================================================
+   Radha Raman Juu · Vrindavan — Design tokens
+   Every colour, size, radius and duration used by the site lives here.
+   Change a value once, it changes everywhere.
+   ========================================================================== */
+
+/* ---- Fonts (self-hosted, no third-party requests) ------------------------ */
+@font-face {
+  font-family: "Marcellus";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../assets/fonts/marcellus-latin-400-normal.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2212;
+}
+@font-face {
+  font-family: "Marcellus";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../assets/fonts/marcellus-latin-ext-400-normal.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+1E00-1EFF, U+20A0-20AB, U+20AD-20C0, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Hanken Grotesk";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("../assets/fonts/hanken-grotesk-latin-wght-normal.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Hanken Grotesk";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("../assets/fonts/hanken-grotesk-latin-ext-wght-normal.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+1E00-1EFF, U+20A0-20AB, U+20AD-20C0, U+2C60-2C7F, U+A720-A7FF;
+}
+/* Devanagari is only downloaded when Hindi text is actually on the page. */
+@font-face {
+  font-family: "Tiro Devanagari Hindi";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../assets/fonts/tiro-devanagari-hindi-devanagari-400-normal.woff2") format("woff2");
+  unicode-range: U+0900-097F, U+1CD0-1CF9, U+200C-200D, U+20A8, U+20B9, U+25CC, U+A830-A839, U+A8E0-A8FF;
+}
+
+:root {
+  color-scheme: light;
+
+  /* ---- Palette (named) -------------------------------------------------- */
+  --c-ivory: #faf6ee;          /* page */
+  --c-cream: #f1e9da;          /* quiet surface */
+  --c-parchment: #e4d8c1;      /* deeper surface / hairlines on cream */
+  --c-maroon: #5e1a28;         /* primary */
+  --c-maroon-deep: #3a0e17;    /* dark sections */
+  --c-saffron: #c98b3c;        /* decorative accent (never body text) */
+  --c-saffron-ink: #8a5410;    /* saffron safe for text on ivory */
+  --c-gold: #b59560;           /* hairlines, rules */
+  --c-gold-light: #e2c791;     /* gold on dark */
+  --c-charcoal: #26201e;
+  --c-charcoal-soft: #5b504b;
+
+  /* ---- Semantic colour -------------------------------------------------- */
+  --bg: var(--c-ivory);
+  --surface: #fffdf8;
+  --surface-2: var(--c-cream);
+  --text: var(--c-charcoal);
+  --text-2: var(--c-charcoal-soft);
+  --heading: var(--c-maroon);
+  --accent: var(--c-saffron);
+  --accent-ink: var(--c-saffron-ink);
+  --border: rgb(38 32 30 / 0.12);
+  --border-strong: rgb(94 26 40 / 0.28);
+  --rule: rgb(181 149 96 / 0.55);
+  --focus: var(--c-maroon);
+  --hover: rgb(94 26 40 / 0.07);
+  --btn-bg: var(--c-maroon);
+  --btn-bg-hover: #7a2335;
+  --btn-text: #fff8ee;
+
+  /* Glass */
+  --glass-bg: rgb(255 252 246 / 0.62);
+  --glass-bg-strong: rgb(255 252 246 / 0.94);   /* nav once the page has scrolled: stays clean over dark sections */
+  --glass-solid: rgb(255 252 246 / 0.96);   /* fallback when blur is unavailable */
+  --glass-border: rgb(94 26 40 / 0.14);
+  --glass-highlight: rgb(255 255 255 / 0.55);
+  --blur: 12px;
+
+  /* Shadows (kept soft and rare) */
+  --shadow-1: 0 1px 2px rgb(58 14 23 / 0.06), 0 6px 18px rgb(58 14 23 / 0.06);
+  --shadow-2: 0 2px 4px rgb(58 14 23 / 0.05), 0 18px 48px rgb(58 14 23 / 0.12);
+
+  /* ---- Typography ------------------------------------------------------- */
+  --font-display: "Marcellus", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --font-body: "Hanken Grotesk", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-deva: "Tiro Devanagari Hindi", "Noto Serif Devanagari", "Kohinoor Devanagari", "Mangal", serif;
+
+  --fs-hero: clamp(2.9rem, 1.55rem + 6.4vw, 6.25rem);
+  --fs-hero-sub: clamp(1.15rem, 0.9rem + 1.2vw, 1.75rem);
+  --fs-h2: clamp(2rem, 1.35rem + 2.9vw, 3.6rem);
+  --fs-h3: clamp(1.2rem, 1.1rem + 0.5vw, 1.45rem);
+  --fs-lead: clamp(1.08rem, 1rem + 0.4vw, 1.25rem);
+  --fs-body: 1.0625rem;
+  --fs-small: 0.9rem;
+  --fs-meta: 0.8125rem;
+
+  --lh-tight: 1.08;
+  --lh-heading: 1.18;
+  --lh-body: 1.65;
+
+  /* ---- Space ------------------------------------------------------------ */
+  --s-1: 0.25rem;
+  --s-2: 0.5rem;
+  --s-3: 0.75rem;
+  --s-4: 1rem;
+  --s-5: 1.5rem;
+  --s-6: 2rem;
+  --s-7: 3rem;
+  --s-8: 4.5rem;
+  --s-9: 7rem;
+  --section-y: clamp(4.5rem, 3rem + 7vw, 9rem);
+  --gutter: clamp(1.25rem, 0.5rem + 3.5vw, 3rem);
+  --max-w: 1180px;
+  --measure: 62ch;
+
+  /* ---- Shape ------------------------------------------------------------ */
+  --r-sm: 10px;
+  --r-md: 18px;
+  --r-lg: 28px;
+  --r-pill: 999px;
+  /* The arch: semicircular top, softly squared base. --arch-v is
+     (half the width ÷ height), so it adapts to each frame's aspect ratio. */
+  --arch-v: 40%;
+  --arch: 50% 50% 5% 5% / var(--arch-v) var(--arch-v) 3% 3%;
+
+  --nav-h: 3.5rem;
+  --tap: 2.75rem; /* 44px minimum touch target */
+
+  /* ---- Texture (tiny inline SVG noise, rasterised once and tiled) -------- */
+  --grain-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .36 0 0 0 0 .2 0 0 0 0 .15 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --grain-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 .93 0 0 0 0 .82 0 0 0 .06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+
+  /* ---- Motion ----------------------------------------------------------- */
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --t-fast: 180ms;
+  --t-med: 380ms;
+  --t-slow: 900ms;
+}
+
+@media (min-width: 900px) {
+  :root {
+    --blur: 18px;
+    --nav-h: 4rem;
+  }
+}
+
+/* Sections on the deep maroon ground re-map the semantic tokens. */
+.on-dark {
+  --bg: var(--c-maroon-deep);
+  --text: #f6efe3;
+  --text-2: #d8c8b4;
+  --heading: #fbf3e4;
+  --accent: var(--c-gold-light);
+  --accent-ink: var(--c-gold-light);
+  --border: rgb(246 239 227 / 0.16);
+  --rule: rgb(226 199 145 / 0.45);
+  --focus: var(--c-gold-light);
+  --hover: rgb(255 255 255 / 0.08);
+  --glass-bg: rgb(255 255 255 / 0.07);
+  --glass-solid: rgb(70 22 33 / 0.96);
+  --glass-border: rgb(246 239 227 / 0.18);
+  --glass-highlight: rgb(255 255 255 / 0.12);
+  --btn-bg: #f6efe3;
+  --btn-bg-hover: #ffffff;
+  --btn-text: var(--c-maroon-deep);
+}
